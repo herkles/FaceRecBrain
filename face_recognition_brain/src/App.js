@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
-import Particles from 'react-particles-js';
 import './App.css';
+
+const app = new Clarifai.App({
+  apiKEY: 'b0f99076a44d49d4bb3fe00bde314e15'
+});
 
 const particlesOptions = {
   particles: {
@@ -40,8 +45,6 @@ class App extends Component {
     }
   );
 }
-
-
 
   render(){
     return (
