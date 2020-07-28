@@ -30,13 +30,13 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {}
+      box: {},
     }
   }
 
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('inputImage');
+    const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
     return {
@@ -72,8 +72,6 @@ class App extends Component {
         <Particles className='particles'
           params={particlesOptions}
         />
-
-
         <Navigation />
         <Logo />
         <Rank />
@@ -81,7 +79,7 @@ class App extends Component {
           onInputChange={this.onInputChange} 
           onButtonSubmit={this.onButtonSubmit} 
         />
-        <FaceRecognition imageUrl={this.state.imageUrl}   />
+        <FaceRecognition box={this.state.box}  imageUrl={this.state.imageUrl}   />
       </div>
     );
   }
