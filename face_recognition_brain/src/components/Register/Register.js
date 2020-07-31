@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Signin = ({ onRouteChange }) => {
+const Register = ({ onRouteChange }) => {
   return(
     <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-1 mw6 shadow-5 center">
       <main className="pa4 black-80">
@@ -24,13 +24,10 @@ const Signin = ({ onRouteChange }) => {
               value="Sign in" 
             />
           </div>
-          <div className="lh-copy mt3">
-            <p onClick={() => onRouteChange('register')} className="f6 link dim black db">Register</p>
-          </div>
         </form>
       </main>
     </article>
   );
 }
 
-export default Signin;
+export default Register;
