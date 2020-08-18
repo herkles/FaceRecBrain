@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.json());
+
 const database = {
   users: [
     {
@@ -50,6 +51,21 @@ app.post('/register', (req, res) => {
   })
   res.json(database.users[database.users.length-1]);
 })
+
+app.get('/profile/:id', (req, res) => {
+  const { id } = req.params;
+  let found = false;
+  database.users.forEach(user => {
+    if (user.id === id) {
+      found = true;
+      res.json(user);
+    } 
+  })
+  if (!found) {
+    res.status(400).json('not found');
+  }
+})
+
 
 
 app.listen(3000, ()=> {
