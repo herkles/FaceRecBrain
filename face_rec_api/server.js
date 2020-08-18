@@ -23,6 +23,13 @@ const database = {
       entries: 0,
       joined: new Date()
     },
+  ],
+  login: [
+    {
+      id: '987',
+      has: '',
+      email: 'john@gmail.com'
+    }
   ]
 }
 
