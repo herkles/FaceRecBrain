@@ -61,16 +61,29 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { email, name, password } = req.body;
-  db('users')
-    .returning('*')
-    .insert({
+  var hash = bcrypt.hashSync(password);
+  db.transaction(trx => {
+    trx.insert({
+      hash: hash,
       email: email,
-      name: name,
-      joined: new Date()
     })
-      .then(user => {
-        res.json(user[0]);
+    .into('login')
+    .returning('email')
+    .then(loginEmail => {
+      return db('users')
+        .returning('*')
+        .insert({
+          email: loginEmail[0],
+          name: name,
+          joined: new Date()
+        })
+          .then(user => {
+            res.json(user[0]);
+        })
     })
+    .then(trx.commit)
+    .catch(trx.rollback)
+  })
     .catch(err => res.status(400).json('unable to register'))
 })
 
@@ -98,12 +111,7 @@ app.put('/image', (req, res) => {
     .catch(err => res.status(400).json('unable to get entries'))
 })
 
-
-
-
 // // Load hash from your password DB.
-
-
 
 app.listen(3000, ()=> {
   console.log('app is running on port 3000');
